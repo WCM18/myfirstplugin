@@ -1,0 +1,9 @@
+/**
+ * Styles for WCMS18 Oneliner Widget
+ */
+
+ .widget_wcms18-oneliner-widget .content {
+	font-style: italic;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
