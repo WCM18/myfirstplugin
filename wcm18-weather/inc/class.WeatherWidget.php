@@ -35,33 +35,27 @@ class WeatherWidget extends WP_Widget {
 		// get city and country for this widget
 		$city = $instance['city'];
 		$country = $instance['country'];
-		// get weather conditions for the specified city and country
-		$current_weather = owm_get_current_weather($city, $country);
-		// display weather conditions for specified city and country
+		// display loading spinner
 		?>
 			<div class="current-weather">
-				<div class="weather-conditions">
-					<?php
-						foreach ($current_weather['conditions'] as $condition) {
-							?>
-								<img
-									src="http://openweathermap.org/img/w/<?php echo $condition->icon; ?>.png"
-									title="<?php echo $condition->description; ?>"
-									alt="<?php echo $condition->main; ?>"
-								>
-							<?php
-						}
-					?>
-				</div>
-
-				<dl>
-					<dt>Temperature</dt>
-					<dd><?php echo $current_weather['temperature']; ?>&deg; C</dd>
-
-					<dt>Humidity</dt>
-					<dd><?php echo $current_weather['humidity']; ?>%</dd>
-				</dl>
+			<div class="current-weather" data-city="<?php echo $city; ?>" data-country="<?php echo $country; ?>">
+				<em><small>Loading...</small></em>
 			</div>
+
+			<!--
+			<script>
+				jQuery(document).ready(function(){
+					w18ww_get_current_weather(
+						'<?php echo $widget_id; ?>',  // widget_id
+						'<?php echo $city; ?>',       // widget_city
+						'<?php echo $country; ?>'     // widget_country
+						'<?php //echo $widget_id; ?>',  // widget_id
+						'<?php //echo $city; ?>',       // widget_city
+						'<?php //echo $country; ?>'     // widget_country
+					);
+				});
+			</script>
+			-->
 		<?php
 		// close widget
 		echo $after_widget;
@@ -82,7 +76,6 @@ class WeatherWidget extends WP_Widget {
 		$city = isset($instance['city']) ? $instance['city'] : 'Malmoe';
 		$country = isset($instance['country']) ? $instance['country'] : 'SE';
 		?>
-
 		<!-- title -->
 		<p>
 			<label
@@ -90,7 +83,6 @@ class WeatherWidget extends WP_Widget {
 			>
 				<?php _e('Title:'); ?>
 			</label>
-
 			<input
 				class="widefat"
 				id="<?php echo $this->get_field_id('title'); ?>"
@@ -100,7 +92,6 @@ class WeatherWidget extends WP_Widget {
 			/>
 		</p>
 		<!-- /title -->
-
 		<!-- city -->
 		<p>
 			<label
@@ -108,7 +99,6 @@ class WeatherWidget extends WP_Widget {
 			>
 				<?php _e('City:'); ?>
 			</label>
-
 			<input
 				class="widefat"
 				id="<?php echo $this->get_field_id('city'); ?>"
@@ -118,7 +108,6 @@ class WeatherWidget extends WP_Widget {
 			/>
 		</p>
 		<!-- /city -->
-
 		<!-- country -->
 		<p>
 			<label
@@ -126,7 +115,6 @@ class WeatherWidget extends WP_Widget {
 			>
 				<?php _e('Country:'); ?>
 			</label>
-
 			<input
 				class="widefat"
 				id="<?php echo $this->get_field_id('country'); ?>"
